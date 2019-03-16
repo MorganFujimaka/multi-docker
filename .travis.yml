@@ -3,18 +3,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t morgan/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t olegkariuk/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run morgan/react-test npm test -- --coverage
+  - docker run olegkariuk/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t morgan/multi-client ./client
-  - docker build -t morgan/multi-nginx ./nginx
-  - docker build -t morgan/multi-server ./server
-  - docker build -t morgan/multi-worker ./worker
+  - docker build -t olegkariuk/multi-client ./client
+  - docker build -t olegkariuk/multi-nginx ./nginx
+  - docker build -t olegkariuk/multi-server ./server
+  - docker build -t olegkariuk/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push morgan/multi-client
-  - docker push morgan/multi-nginx
-  - docker push morgan/multi-server
-  - docker push morgan/multi-worker
+  - docker push olegkariuk/multi-client
+  - docker push olegkariuk/multi-nginx
+  - docker push olegkariuk/multi-server
+  - docker push olegkariuk/multi-worker
